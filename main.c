@@ -21,6 +21,17 @@ int main() {
         }
         printf("\nSize: %d, Capacity: %d\n", vec.size, vec.capacity);
 
+        // Wstawianie elementów (TEST INSERT)
+        vector_insert(&vec, 0, 999);                  // Na początek
+        vector_insert(&vec, vec.size / 2, 555);       // Do środka
+        vector_insert(&vec, vec.size, 777);           // Na koniec
+
+        printf("After vector_insert (start, middle, end):\n");
+        for (int i = 0; i < vector_get_size(&vec); i++) {
+            printf("%d ", vector_get(&vec, i));
+        }
+        printf("\nSize: %d, Capacity: %d\n", vec.size, vec.capacity);
+
         // Usuwanie ostatniego elementu
         vector_pop_back(&vec);
         printf("After pop_back:\n");
@@ -72,6 +83,7 @@ int main() {
         vector_free(&vec);
         printf("After vector_free:\n");
         printf("Size: %d, Capacity: %d, data pointer: %p\n", vec.size, vec.capacity, (void*)vec.data);
+
         break;
     }
     case 2:{

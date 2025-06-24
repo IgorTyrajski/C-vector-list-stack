@@ -21,7 +21,7 @@ void vector_free(IntVector *vec);
 void vector_clear(IntVector *vec);
 bool vector_empty(IntVector *vec);
 int vector_get_size(const IntVector *vec);
-void vector_insert(IntVector *vec, const int index);
+void vector_insert(IntVector *vec, const int index, const int value);
 
 
 void vector_init(IntVector *vec){
@@ -79,13 +79,13 @@ int  vector_get(const IntVector *vec, const int index){
 
 void  vector_erase(IntVector *vec, const int index){
     if (vec->size-1>=index && index>=0){
-        for (int i=index;i<vec->size-1;i++){
-            vec->data[i]=vec->data[i+1];
-        }
         vec->size--;
         if (vec->size%10<(vec->capacity/10)-1){
             vec->capacity-=10;
             vec->data=realloc(vec->data,vec->capacity*sizeof(int));
+        }
+        for (int i=index;i<vec->size-1;i++){
+            vec->data[i]=vec->data[i+1];
         }
     }
 }
@@ -110,4 +110,19 @@ bool vector_empty(IntVector *vec){
 int vector_get_size(const IntVector *vec){
     return vec->size;
 }
+void vector_insert(IntVector *vec, const int index, const int value){
+    if (vec->size>=index && index>=0){
+        if (vec->size==vec->capacity){
+            vec->capacity+=10;
+            vec->data=realloc(vec->data,vec->capacity*sizeof(int));
+        }
+        vec->size++;
+        for (int i=vec->size;i>index;i--){
+            vec->data[i]=vec->data[i-1];
+
+        }
+        vec->data[index]=value;
+    }
+}
+
 #endif // VECTOR_H
