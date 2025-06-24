@@ -1,0 +1,48 @@
+# Ignoruj wszystko...
+*
+
+# ...poza katalogami (żeby Git mógł zejść w głąb)
+!*/
+
+# ...i plikami .c oraz .h
+!*.c
+!*.h
+
+# Qt Creator project files
+*.pro
+*.pro.user
+*.user
+*.qbs
+*.qmlproject
+*.creator*
+*.autosave
+
+# Katalogi build i wynikowe pliki kompilacji
+build*/
+debug/
+release/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+
+# Pliki CMake (jeśli używasz)
+CMakeLists.txt.user
+CMakeFiles/
+CMakeCache.txt
+
+# Makefile
+Makefile
+*.make
+*.moc
+
+# Pliki tymczasowe
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
