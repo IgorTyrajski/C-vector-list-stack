@@ -16,6 +16,7 @@ void vector_pop_back(IntVector *vec);
 void vector_sort_des(IntVector *vec); //descending
 void vector_sort_asc(IntVector *vec); //ascending
 int  vector_get(const IntVector *vec, const int index);
+void  vector_set(const IntVector *vec, const int index, const int value);
 void vector_erase(IntVector *vec, const int index);
 void vector_free(IntVector *vec);
 void vector_clear(IntVector *vec);
@@ -123,6 +124,11 @@ void vector_insert(IntVector *vec, const int index, const int value){
         }
         vec->data[index]=value;
     }
+}
+
+void  vector_set(const IntVector *vec, const int index, const int value){
+    if (index<0 || index>=vector_get_size(vec)) return;
+    vec->data[index]=value;
 }
 
 #endif // VECTOR_H
