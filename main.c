@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include "vector.h"
 #include "list.h"
+#include "stack.h"
 
 int main() {
-    const int c=2; //1 - testing vector, 2 = list, 3 - stack
+    const int c=3; //1 - testing vector, 2 = list, 3 - stack
     switch (c){
     case 1:{
         IntVector vec;
@@ -89,61 +90,88 @@ int main() {
     }
     case 2:{
         IntList myList;
-    list_init(&myList);
-    printf("List initialized. Empty? %s\n", list_empty(&myList) ? "Yes" : "No");
+        list_init(&myList);
+        printf("List initialized. Empty? %s\n", list_empty(&myList) ? "Yes" : "No");
 
-    // Test push_back
-    for (int i = 1; i <= 5; i++) {
-        list_push_back(&myList, i * 10);
-    }
-    printf("After push_back 5 elements: ");
-    print_list(&myList);
+        // Test push_back
+        for (int i = 1; i <= 5; i++) {
+            list_push_back(&myList, i * 10);
+        }
+        printf("After push_back 5 elements: ");
+        print_list(&myList);
 
-    // Test push_front
-    list_push_front(&myList, 99);
-    printf("After push_front 99: ");
-    print_list(&myList);
+        // Test push_front
+        list_push_front(&myList, 99);
+        printf("After push_front 99: ");
+        print_list(&myList);
 
-    // Test pop_back
-    list_pop_back(&myList);
-    printf("After pop_back: ");
-    print_list(&myList);
+        // Test pop_back
+        list_pop_back(&myList);
+        printf("After pop_back: ");
+        print_list(&myList);
 
-    // Test pop_front
-    list_pop_front(&myList);
-    printf("After pop_front: ");
-    print_list(&myList);
+        // Test pop_front
+        list_pop_front(&myList);
+        printf("After pop_front: ");
+        print_list(&myList);
 
-    // Test get & set
-    printf("Element at index 2: %d\n", list_get(&myList, 2));
-    list_set(&myList, 2, 777);
-    printf("After set index 2 to 777: ");
-    print_list(&myList);
+        // Test get & set
+        printf("Element at index 2: %d\n", list_get(&myList, 2));
+        list_set(&myList, 2, 777);
+        printf("After set index 2 to 777: ");
+        print_list(&myList);
 
-    // Test erase
-    list_erase(&myList, 1);
-    printf("After erase index 1: ");
-    print_list(&myList);
+        // Test erase
+        list_erase(&myList, 1);
+        printf("After erase index 1: ");
+        print_list(&myList);
 
-    // Test sort ascending
-    list_push_back(&myList, 3);
-    list_push_back(&myList, 42);
-    list_sort_asc(&myList);
-    printf("After sort ascending: ");
-    print_list(&myList);
+        // Test sort ascending
+        list_push_back(&myList, 3);
+        list_push_back(&myList, 42);
+        list_sort_asc(&myList);
+        printf("After sort ascending: ");
+        print_list(&myList);
 
-    // Test sort descending
-    list_sort_des(&myList);
-    printf("After sort descending: ");
-    print_list(&myList);
+        // Test sort descending
+        list_sort_des(&myList);
+        printf("After sort descending: ");
+        print_list(&myList);
 
-    // Test clear
-    list_clear(&myList);
-    printf("After clear. Empty? %s\n", list_empty(&myList) ? "Yes" : "No");
+        // Test clear
+        list_clear(&myList);
+        printf("After clear. Empty? %s\n", list_empty(&myList) ? "Yes" : "No");
         break;
     }
     case 3:{
+        IntStack stack;
+        stack_init(&stack);
 
+        printf("Czy stos jest pusty? %s\n", stack_empty(&stack) ? "Tak" : "Nie");
+
+        // Dodaj kilka elementów
+        for (int i = 1; i <= 15; ++i) {
+            stack_push(&stack, i * 10);
+            printf("Dodano %d, rozmiar stosu: %d, top: %d\n", i * 10, stack_size(&stack), stack_top(&stack));
+        }
+
+        // Usuwanie kilku elementów
+        for (int i = 0; i < 5; ++i) {
+            printf("Usuwam %d\n", stack_top(&stack));
+            stack_pop(&stack);
+        }
+
+        printf("Aktualny rozmiar stosu: %d\n", stack_size(&stack));
+        printf("Aktualny top: %d\n", stack_top(&stack));
+
+        // Opróżnianie stosu do końca
+        while (!stack_empty(&stack)) {
+            printf("Usuwam %d\n", stack_top(&stack));
+            stack_pop(&stack);
+        }
+
+        printf("Czy stos jest pusty? %s\n", stack_empty(&stack) ? "Tak" : "Nie");
+        free(stack.data);
         break;
     }
     }

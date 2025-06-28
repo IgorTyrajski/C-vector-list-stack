@@ -14,7 +14,7 @@ void stack_init(IntStack *sta);
 int stack_size (IntStack *sta);
 bool stack_empty(IntStack *sta);
 int stack_top(IntStack *sta);
-void stack_push(IntStack *sta);
+void stack_push(IntStack *sta, const int value);
 void stack_pop(IntStack *sta);
 
 
@@ -55,4 +55,5 @@ void stack_pop(IntStack *sta){
         sta->data=realloc(sta->data,sta->capacity*sizeof(int));
     }
 }
+
 #endif // STACK_H
