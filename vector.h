@@ -75,7 +75,7 @@ void vector_sort_des(IntVector *vec){
 
 int  vector_get(const IntVector *vec, const int index){
     if (index>=0 && index<vec->size) return vec->data[index];
-    else return 0;
+    else return -1;
 }
 
 void  vector_erase(IntVector *vec, const int index){

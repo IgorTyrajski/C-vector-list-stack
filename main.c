@@ -2,9 +2,10 @@
 #include "vector.h"
 #include "list.h"
 #include "stack.h"
+#include "map.h"
 
 int main() {
-    const int c=3; //1 - testing vector, 2 = list, 3 - stack
+    const int c=4; //1 = testing vector, 2 = list, 3 = stack, 4 = mapa
     switch (c){
     case 1:{
         IntVector vec;
@@ -147,33 +148,65 @@ int main() {
         IntStack stack;
         stack_init(&stack);
 
-        printf("Czy stos jest pusty? %s\n", stack_empty(&stack) ? "Tak" : "Nie");
+        printf("Is the stack empty? %s\n", stack_empty(&stack) ? "Yes" : "No");
 
-        // Dodaj kilka elementów
+        // Push several elements
         for (int i = 1; i <= 15; ++i) {
             stack_push(&stack, i * 10);
-            printf("Dodano %d, rozmiar stosu: %d, top: %d\n", i * 10, stack_size(&stack), stack_top(&stack));
+            printf("Pushed %d, stack size: %d, top element: %d\n", i * 10, stack_size(&stack), stack_top(&stack));
         }
 
-        // Usuwanie kilku elementów
+        // Pop a few elements
         for (int i = 0; i < 5; ++i) {
-            printf("Usuwam %d\n", stack_top(&stack));
+            printf("Popping top element: %d\n", stack_top(&stack));
             stack_pop(&stack);
         }
 
-        printf("Aktualny rozmiar stosu: %d\n", stack_size(&stack));
-        printf("Aktualny top: %d\n", stack_top(&stack));
+        printf("Current stack size: %d\n", stack_size(&stack));
+        printf("Current top element: %d\n", stack_top(&stack));
 
-        // Opróżnianie stosu do końca
+        // Empty the stack completely
         while (!stack_empty(&stack)) {
-            printf("Usuwam %d\n", stack_top(&stack));
+            printf("Popping top element: %d\n", stack_top(&stack));
             stack_pop(&stack);
         }
 
-        printf("Czy stos jest pusty? %s\n", stack_empty(&stack) ? "Tak" : "Nie");
+        printf("Is the stack empty? %s\n", stack_empty(&stack) ? "Yes" : "No");
+
         free(stack.data);
         break;
     }
+    case 4:
+        CharIntMap map;
+        map_init(&map);
+
+        printf("Adding entries:\n");
+        map_set(&map, 'a', 10);
+        map_set(&map, 'b', 20);
+        map_set(&map, 'c', 30);
+        print_map(&map);
+
+        printf("Updating key 'a' to 99:\n");
+        map_set(&map, 'a', 99);
+        print_map(&map);
+
+        printf("Removing key 'b'\n");
+        map_remove(&map, 'b');
+        print_map(&map);
+
+        printf("Checking presence:\n");
+        printf("  Contains 'c'? %s\n", map_contains(&map, 'c') ? "Yes" : "No");
+        printf("  Contains 'b'? %s\n", map_contains(&map, 'b') ? "Yes" : "No");
+
+        printf("Accessing values:\n");
+        printf("  map_get('a') = %d\n", map_get(&map, 'a'));
+        printf("  map_get('z') = %d (should be -1)\n", map_get(&map, 'z'));
+
+        print_map(&map);
+
+        free(map.keys);
+        free(map.values);
+        break;
     }
 
 

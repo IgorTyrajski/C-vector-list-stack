@@ -89,7 +89,7 @@ int  list_get(const IntList *lis, const int index){
     int i=0;
     int size=list_get_size(lis);
 
-    if (lis->head==NULL || index<0 || index>=size) return 0;
+    if (lis->head==NULL || index<0 || index>=size) return -1;
 
     IntListElement* elem = lis->head;
     while (i!=index){
