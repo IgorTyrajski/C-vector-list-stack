@@ -1,3 +1,4 @@
+# README
 Kod "symulujący" działanie **vector'a, list'y (jednostronnej), stack'a LIFO i mapy char - int** z C++ **w C**.
 Pisany z racji opanowania C++ i chęci lepszego poznania C.
 
